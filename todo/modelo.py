@@ -1,3 +1,4 @@
+import json
 import uuid
 from datetime import datetime
 
@@ -88,8 +89,34 @@ class Tarea:
     def completada(self, completada):
         self._completada = completada
 
-class GestorTareas:
-    def __init__(self, ruta_fichero, tareas):
-        self.ruta_fichero = ruta_fichero
-        self.tareas = tareas
 
+"""
+Clase que se encarga del manejo y gestión de los datos de las tareas
+"""
+class GestorTareas:
+    def __init__(self):
+        self.ruta_fichero = "data/tareas.json"
+        self.lista_tareas = []
+        self.cargar()
+
+    def anadir_tarea(self, tarea) -> None:
+        self.lista_tareas.append(tarea.to_dict())
+
+    def guardar(self) -> None:
+        with open(self.ruta_fichero, "w") as json_file:
+            json.dump(self.lista_tareas, json_file, indent=4)
+
+    def cargar(self) -> None:
+        with open(self.ruta_fichero, "r") as json_file:
+            self.lista_tareas = json.load(json_file)
+
+    def filtrar(self, **criterios) -> None:
+        self.lista_tareas = []
+
+    def ordenar(self, key) -> None:
+        pass
+
+    def obtener_tarea(self, id) -> Tarea:
+        pass
+
+    def
