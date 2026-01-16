@@ -44,6 +44,3 @@ def nueva_tarea() -> dict | None:
         return tarea
 
     return None
-
-def
-
