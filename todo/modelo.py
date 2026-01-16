@@ -130,6 +130,9 @@ class Tarea:
     def completada(self, completada):
         self._completada = completada
 
+    def __str__(self):
+        print(self.to_dict())
+
 
 """
 Clase que se encarga del manejo y gestión de los datos de las tareas
@@ -146,6 +149,7 @@ class GestorTareas:
 
     def anadir_tarea(self, tarea) -> None:
         self.lista_tareas.append(tarea)
+        self.guardar()
 
     def guardar(self) -> None:
         try:
@@ -153,17 +157,20 @@ class GestorTareas:
             with open(self.ruta_fichero, "w") as json_file:
                 json.dump(lista_para_json, json_file, indent=4)
         except Exception as e:
-            print(f"Error al guardar: {e}")
+            print(f"Error al guardar, se cancela el proceso.")
+            print(e)
 
+        self.cargar()
 
     def cargar(self) -> None:
         try:
             with open(self.ruta_fichero, "r") as json_file:
                 datos = json.load(json_file)
                 self.lista_tareas = [Tarea.from_dict(dato) for dato in datos]
-        except FileNotFoundError:
+        except Exception as e:
             self.lista_tareas = []
-            print("No se ha encontrado el archivo. Se iniciará una lista vacía.")
+            print(f"Ha ocurrido un error, se procedera a iniciar una lista vacia.")
+            print(e)
 
     def filtrar(self, **criterios) -> None:
         self.lista_tareas = []

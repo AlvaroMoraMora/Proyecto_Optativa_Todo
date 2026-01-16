@@ -1,0 +1,72 @@
+[
+    {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "titulo": "Completar proyecto Python",
+        "descripcion": "Terminar el gestor de tareas con todas las funcionalidades",
+        "fecha_creacion": "2026-01-10T10:00:00",
+        "fecha_limite": "2026-01-20",
+        "prioridad": 3,
+        "etiquetas": [
+            "programacion",
+            "python",
+            "proyecto"
+        ],
+        "completada": false
+    },
+    {
+        "id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+        "titulo": "Estudiar para examen",
+        "descripcion": "Repasar los temas de la asignatura optativa",
+        "fecha_creacion": "2026-01-12T14:30:00",
+        "fecha_limite": "2026-01-25",
+        "prioridad": 2,
+        "etiquetas": [
+            "estudios",
+            "examen"
+        ],
+        "completada": false
+    },
+    {
+        "id": "c3d4e5f6-a7b8-9012-cdef-345678901234",
+        "titulo": "Comprar material de oficina",
+        "descripcion": "Necesito boligrafos, cuadernos y post-its",
+        "fecha_creacion": "2026-01-15T09:00:00",
+        "fecha_limite": "2026-01-18",
+        "prioridad": 1,
+        "etiquetas": [
+            "compras",
+            "oficina"
+        ],
+        "completada": true
+    },
+    {
+        "id": "427808ac-15a9-4ead-a861-79f1770eaa09",
+        "titulo": "klsajdlfs",
+        "descripcion": "alskfjlasf",
+        "fecha_creacion": "2026-01-16T18:07:24.353712",
+        "fecha_limite": "2026-02-02",
+        "prioridad": 1,
+        "etiquetas": "flkajfld",
+        "completada": false
+    },
+    {
+        "id": "3feb1a75-2b3a-4f6d-9586-647c82c19394",
+        "titulo": "aflkja",
+        "descripcion": "alfjlasafdafdsfasa",
+        "fecha_creacion": "2026-01-16T18:49:17.499944",
+        "fecha_limite": "2026-02-02",
+        "prioridad": 3,
+        "etiquetas": "fdlkajfkal",
+        "completada": false
+    },
+    {
+        "id": "6994275e-599a-4411-a209-629d4a2864b8",
+        "titulo": "salkdfjalkf",
+        "descripcion": "fjadlkajfla",
+        "fecha_creacion": "2026-01-16T18:50:40.611845",
+        "fecha_limite": "2026-12-12",
+        "prioridad": 3,
+        "etiquetas": "dalkfja",
+        "completada": false
+    }
+]
