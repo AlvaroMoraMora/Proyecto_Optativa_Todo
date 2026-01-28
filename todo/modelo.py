@@ -172,15 +172,43 @@ class GestorTareas:
             print(f"Ha ocurrido un error, se procedera a iniciar una lista vacia.")
             print(e)
 
-    def filtrar(self, **criterios) -> None:
-        self.lista_tareas = []
+    def eliminar(self, id) -> None:
+        self.lista_tareas = [t for t in self.lista_tareas if t.id != id]
+        self.guardar()
 
-    def ordenar(self, key) -> None:
-        pass
+    def filtrar(self, **criterios) -> list:
+        resultado = self.lista_tareas
 
-    """
-    Funcion para obtener una tarea según el id
-    """
+        if 'completada' in criterios:
+            resultado = [t for t in resultado if t.completada == criterios['completada']]
+        
+        if 'prioridad' in criterios:
+            resultado = [t for t in resultado if t.prioridad == criterios['prioridad']]
+        
+        if 'etiqueta' in criterios:
+            etiqueta = criterios['etiqueta'].lower()
+            resultado = [t for t in resultado if any(etiqueta in e.lower() for e in t.etiquetas)]
+
+        return resultado
+
+    def ordenar(self, key: str, descendente: bool = False) -> list:
+        if key == 'fecha_limite':
+            ordenado = sorted(self.lista_tareas, 
+                key=lambda t: (t.fecha_limite is None, t.fecha_limite), 
+                reverse=descendente)
+        elif key == 'prioridad':
+            ordenado = sorted(self.lista_tareas, 
+                key=lambda t: t.prioridad.value, 
+                reverse=not descendente) 
+        elif key == 'fecha_creacion':
+            ordenado = sorted(self.lista_tareas, 
+                key=lambda t: t.fecha_creacion, 
+                reverse=descendente)
+        else:
+            ordenado = self.lista_tareas
+        
+        return ordenado
+
     def obtener_tarea(self, id) -> Tarea | None:
         tarea_filtrada = next((tarea for tarea in self.lista_tareas if tarea.id == id), None)
 
@@ -189,9 +217,6 @@ class GestorTareas:
 
         return tarea_filtrada
 
-    """
-    Funcion para buscar tareas según el titulo o la descripcion
-    """
     def buscar(self, texto) -> List[Tarea] | None:
         texto = texto.lower()
 

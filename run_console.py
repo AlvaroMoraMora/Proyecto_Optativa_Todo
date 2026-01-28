@@ -3,5 +3,7 @@ import json
 from todo.consola import *
 
 if __name__ == '__main__':
-    while 1 == 1:
-        menu()
+    opcion = 0
+
+    while opcion != 1:
+        opcion = menu()

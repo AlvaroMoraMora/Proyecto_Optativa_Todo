@@ -60,13 +60,16 @@
         "completada": false
     },
     {
-        "id": "6994275e-599a-4411-a209-629d4a2864b8",
-        "titulo": "salkdfjalkf",
-        "descripcion": "fjadlkajfla",
-        "fecha_creacion": "2026-01-16T18:50:40.611845",
-        "fecha_limite": "2026-12-12",
-        "prioridad": 3,
-        "etiquetas": "dalkfja",
+        "id": "3feb1a75-2b3a-4f6d-9586-647c82c19394",
+        "titulo": "Don quijote",
+        "descripcion": "Don quijote en una nueva aventura",
+        "fecha_creacion": "2026-01-16T18:49:17.499944",
+        "fecha_limite": "2026-02-02",
+        "prioridad": 2,
+        "etiquetas": [
+            "Literatura",
+            "Fantasia"
+        ],
         "completada": false
     }
 ]
