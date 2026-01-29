@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Todo List{% endblock %}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              nunito: ["Nunito", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .gradient-bg {
+          background: linear-gradient(
+            135deg,
+            #667eea 0%,
+            #764ba2 50%,
+            #f093fb 100%
+          );
+        }
+        .gradient-primary {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-success {
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .text-gradient {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-nunito gradient-bg min-h-screen p-6">
+    <div class="max-w-6xl mx-auto">
+      <header
+        class="bg-white/95 backdrop-blur-sm rounded-2xl px-8 py-5 mb-6 flex justify-between items-center shadow-xl flex-wrap gap-4"
+      >
+        <a
+          href="{% url 'lista_tareas' %}"
+          class="text-3xl font-extrabold text-gradient no-underline"
+          >Todo List</a
+        >
+        <a
+          href="{% url 'crear_tarea' %}"
+          class="inline-flex items-center gap-2 gradient-success text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:-translate-y-0.5 transition-all"
+          >+ Nueva Tarea</a
+        >
+      </header>
+
+      {% if messages %} {% for message in messages %}
+      <div
+        class="bg-emerald-100 border-2 border-emerald-300 text-emerald-700 px-5 py-4 rounded-xl mb-5 font-semibold"
+      >
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

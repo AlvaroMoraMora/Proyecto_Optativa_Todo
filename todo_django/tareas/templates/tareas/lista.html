@@ -1,0 +1,92 @@
+﻿{% extends 'tareas/base.html' %}
+
+{% block title %}Mis Tareas - Todo List{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
+    <section class="bg-white/95 backdrop-blur-sm rounded-2xl p-7 shadow-xl">
+        <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
+            <h2 class="text-xl font-bold text-slate-800">Mis Tareas</h2>
+            <div class="flex gap-2">
+                <a href="{% url 'lista_tareas' %}" class="px-4 py-2 rounded-full text-xs font-semibold border-2 transition-all {% if filtro == 'todas' %}border-indigo-500 text-indigo-500{% else %}border-slate-200 text-slate-500 hover:border-indigo-500{% endif %}">Todas</a>
+                <a href="{% url 'lista_tareas' %}?filtro=pendientes" class="px-4 py-2 rounded-full text-xs font-semibold border-2 transition-all {% if filtro == 'pendientes' %}border-indigo-500 text-indigo-500{% else %}border-slate-200 text-slate-500 hover:border-indigo-500{% endif %}">Pendientes</a>
+                <a href="{% url 'lista_tareas' %}?filtro=completadas" class="px-4 py-2 rounded-full text-xs font-semibold border-2 transition-all {% if filtro == 'completadas' %}border-indigo-500 text-indigo-500{% else %}border-slate-200 text-slate-500 hover:border-indigo-500{% endif %}">Completadas</a>
+            </div>
+        </div>
+
+        <form class="flex gap-3 mb-5" method="get">
+            <input type="hidden" name="filtro" value="{{ filtro }}">
+            <input type="text" name="busqueda" class="flex-1 px-4 py-3 border-2 border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500" placeholder="Buscar tareas..." value="{{ busqueda }}">
+            <button type="submit" class="bg-slate-500 hover:bg-slate-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all">Buscar</button>
+        </form>
+
+        <div class="mb-7">
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold text-slate-500">Progreso del dia</span>
+                <span class="font-semibold text-slate-500">{{ stats.completadas }} de {{ stats.total }} completadas</span>
+            </div>
+            <div class="h-3 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500" style="width: {{ stats.progreso }}%;"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+            {% if tareas %}
+                {% for tarea in tareas %}
+                <div class="flex items-center gap-4 p-4 rounded-2xl transition-all hover:translate-x-2 hover:shadow-lg {% if tarea.prioridad == 3 %}bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200{% elif tarea.prioridad == 2 %}bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200{% else %}bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200{% endif %}">
+                    <form action="{% url 'toggle_completada' tarea.pk %}" method="post" class="contents">
+                        {% csrf_token %}
+                        <button type="submit" class="w-7 h-7 rounded-lg border-3 cursor-pointer transition-all flex items-center justify-center text-sm text-white {% if tarea.completada %}bg-gradient-to-br from-emerald-500 to-emerald-600 border-emerald-500{% else %}bg-white border-slate-300{% endif %}">{% if tarea.completada %}OK{% endif %}</button>
+                    </form>
+                    <div class="flex-1">
+                        <div class="font-bold text-slate-800 mb-1 {% if tarea.completada %}line-through text-slate-400{% endif %}">{{ tarea.titulo }}</div>
+                        <div class="flex gap-3 text-xs text-slate-500 flex-wrap">
+                            {% if tarea.fecha_limite %}<span>{{ tarea.fecha_limite }}</span>{% endif %}
+                            {% for etiqueta in tarea.get_etiquetas_list %}<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-100 text-blue-600">{{ etiqueta }}</span>{% endfor %}
+                        </div>
+                    </div>
+                    <span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase {% if tarea.prioridad == 3 %}bg-red-200 text-red-600{% elif tarea.prioridad == 2 %}bg-amber-200 text-amber-700{% else %}bg-emerald-200 text-emerald-600{% endif %}">{{ tarea.get_prioridad_nombre }}</span>
+                    <div class="flex gap-2">
+                        <a href="{% url 'editar_tarea' tarea.pk %}" class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center hover:scale-110 transition-all">E</a>
+                        <form action="{% url 'eliminar_tarea' tarea.pk %}" method="post" class="contents" onsubmit="return confirm('Eliminar esta tarea?')">
+                            {% csrf_token %}
+                            <button type="submit" class="w-9 h-9 rounded-xl bg-red-100 text-red-600 flex items-center justify-center hover:scale-110 transition-all">X</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="text-center py-12 text-slate-500">
+                    <div class="text-6xl mb-4"></div>
+                    <p>No hay tareas {{ filtro }}</p>
+                    <a href="{% url 'crear_tarea' %}" class="inline-block mt-4 gradient-success text-white px-6 py-3 rounded-xl font-bold">+ Crear primera tarea</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <aside class="flex flex-col gap-5">
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+            <h3 class="font-bold text-slate-800 mb-4 text-lg">Estadisticas</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="text-center p-4 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200">
+                    <div class="text-3xl font-extrabold text-slate-800">{{ stats.total }}</div>
+                    <div class="text-xs text-slate-500 font-semibold">Total</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200">
+                    <div class="text-3xl font-extrabold text-slate-800">{{ stats.pendientes }}</div>
+                    <div class="text-xs text-slate-500 font-semibold">Pendientes</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200">
+                    <div class="text-3xl font-extrabold text-slate-800">{{ stats.completadas }}</div>
+                    <div class="text-xs text-slate-500 font-semibold">Completadas</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-gradient-to-br from-pink-100 to-pink-200">
+                    <div class="text-3xl font-extrabold text-slate-800">{{ stats.urgentes }}</div>
+                    <div class="text-xs text-slate-500 font-semibold">Urgentes</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+{% endblock %}

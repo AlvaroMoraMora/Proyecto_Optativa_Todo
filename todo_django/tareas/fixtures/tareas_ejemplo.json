@@ -1,0 +1,132 @@
+[
+  {
+    "model": "tareas.tarea",
+    "pk": 1,
+    "fields": {
+      "titulo": "Completar informe mensual",
+      "descripcion": "Redactar y enviar el informe de ventas del mes de enero",
+      "fecha_creacion": "2026-01-28T10:00:00Z",
+      "fecha_limite": "2026-01-31",
+      "prioridad": 3,
+      "etiquetas": "trabajo, urgente",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 2,
+    "fields": {
+      "titulo": "Comprar ingredientes para la cena",
+      "descripcion": "Verduras, pasta, salsa de tomate y queso parmesano",
+      "fecha_creacion": "2026-01-28T09:30:00Z",
+      "fecha_limite": "2026-01-29",
+      "prioridad": 2,
+      "etiquetas": "personal, compras",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 3,
+    "fields": {
+      "titulo": "Revisar pull requests pendientes",
+      "descripcion": "Hay 3 PRs esperando revision en el repositorio principal",
+      "fecha_creacion": "2026-01-27T14:00:00Z",
+      "fecha_limite": "2026-01-30",
+      "prioridad": 3,
+      "etiquetas": "trabajo, codigo",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 4,
+    "fields": {
+      "titulo": "Llamar al dentista",
+      "descripcion": "Pedir cita para revision anual",
+      "fecha_creacion": "2026-01-26T08:00:00Z",
+      "fecha_limite": "2026-02-05",
+      "prioridad": 1,
+      "etiquetas": "personal, salud",
+      "completada": true
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 5,
+    "fields": {
+      "titulo": "Preparar presentacion del proyecto",
+      "descripcion": "Crear slides para la demo del viernes con el equipo",
+      "fecha_creacion": "2026-01-28T11:00:00Z",
+      "fecha_limite": "2026-01-31",
+      "prioridad": 3,
+      "etiquetas": "trabajo, presentacion",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 6,
+    "fields": {
+      "titulo": "Actualizar CV",
+      "descripcion": "Anadir los ultimos proyectos y habilidades adquiridas",
+      "fecha_creacion": "2026-01-25T16:00:00Z",
+      "fecha_limite": "2026-02-15",
+      "prioridad": 1,
+      "etiquetas": "personal, carrera",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 7,
+    "fields": {
+      "titulo": "Organizar escritorio",
+      "descripcion": "Limpiar cables, ordenar documentos y tirar papeles viejos",
+      "fecha_creacion": "2026-01-27T09:00:00Z",
+      "fecha_limite": null,
+      "prioridad": 1,
+      "etiquetas": "personal, hogar",
+      "completada": true
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 8,
+    "fields": {
+      "titulo": "Estudiar para certificacion",
+      "descripcion": "Repasar modulos 5 y 6 del curso de AWS",
+      "fecha_creacion": "2026-01-28T08:00:00Z",
+      "fecha_limite": "2026-02-10",
+      "prioridad": 2,
+      "etiquetas": "estudio, trabajo",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 9,
+    "fields": {
+      "titulo": "Enviar felicitacion a Maria",
+      "descripcion": "Es su cumpleanos el 2 de febrero",
+      "fecha_creacion": "2026-01-28T12:00:00Z",
+      "fecha_limite": "2026-02-02",
+      "prioridad": 2,
+      "etiquetas": "personal, social",
+      "completada": false
+    }
+  },
+  {
+    "model": "tareas.tarea",
+    "pk": 10,
+    "fields": {
+      "titulo": "Hacer backup del servidor",
+      "descripcion": "Ejecutar script de backup y verificar integridad",
+      "fecha_creacion": "2026-01-26T15:00:00Z",
+      "fecha_limite": "2026-01-28",
+      "prioridad": 3,
+      "etiquetas": "trabajo, mantenimiento",
+      "completada": true
+    }
+  }
+]
